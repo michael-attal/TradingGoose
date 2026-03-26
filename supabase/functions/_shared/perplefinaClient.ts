@@ -87,11 +87,21 @@ export async function callPerplefina(request: PerplefinaRequest): Promise<Perple
   let response: Response;
 
   try {
-    response = await fetch(PERPLEFINA_API_URL, {
+    const apiToken = Deno.env.get('PERPLEFINA_API_TOKEN');
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json'
+    };
+    if (apiToken) {
+      headers['Authorization'] = `Bearer ${apiToken}`;
+    }
+
+    // Ensure we call the /api/search endpoint
+    const baseUrl = PERPLEFINA_API_URL?.replace(/\/+$/, '') || '';
+    const searchUrl = baseUrl.endsWith('/api/search') ? baseUrl : `${baseUrl}/api/search`;
+
+    response = await fetch(searchUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers,
       body: JSON.stringify(perplefinaRequest),
       signal: controller.signal
     });
