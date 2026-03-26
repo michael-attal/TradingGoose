@@ -36,9 +36,9 @@ serve(async (req: Request): Promise<Response> => {
       return new Response('ok', { headers: corsHeaders });
     }
 
-    // Initialize Supabase client
+    // Initialize Supabase client - prefer legacy JWT keys for Edge Function compatibility
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const supabaseServiceKey = Deno.env.get('LEGACY_SERVICE_ROLE_KEY') || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     
     console.log('🔍 Coordinator environment check:');
     console.log(`   SUPABASE_URL: ${supabaseUrl ? 'Found' : 'Missing'}`);

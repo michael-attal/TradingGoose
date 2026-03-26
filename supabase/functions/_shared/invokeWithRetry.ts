@@ -2,7 +2,9 @@ import { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { ANALYSIS_STATUS } from './statusTypes.ts';
 
 function buildAuthHeaders() {
-  const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  // Prefer legacy JWT keys over new sb_secret_* keys for Edge Function invocation
+  const legacyServiceRoleKey = Deno.env.get('LEGACY_SERVICE_ROLE_KEY');
+  const serviceRoleKey = legacyServiceRoleKey || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
   const functionAccessToken =
     Deno.env.get('SUPABASE_FUNCTION_ACCESS_TOKEN') ||
     Deno.env.get('FUNCTION_ACCESS_TOKEN');
@@ -12,10 +14,14 @@ function buildAuthHeaders() {
     return {};
   }
 
-  const token = functionAccessToken || serviceRoleKey;
+  // For auth header, prefer a JWT token (starts with eyJ) for Edge Function gateway compatibility
+  let token = functionAccessToken || serviceRoleKey;
+  if (token && !token.startsWith('eyJ') && legacyServiceRoleKey) {
+    token = legacyServiceRoleKey;
+  }
 
-  if (!functionAccessToken && serviceRoleKey && !serviceRoleKey.startsWith('eyJ')) {
-    console.warn('⚠️ Service role key does not appear to be a JWT. If Edge Functions require JWT verification, set FUNCTION_ACCESS_TOKEN.');
+  if (!token?.startsWith('eyJ')) {
+    console.warn('⚠️ Auth token does not appear to be a JWT. Edge Function invocations may fail.');
   }
 
   return {
