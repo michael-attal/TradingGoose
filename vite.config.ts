@@ -6,8 +6,8 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Configure base path for GitHub Pages deployment
-  // This will be '/' for TradingGoose.github.io
-  base: '/',
+  // Use '/TradingGoose/' for michael-attal.github.io/TradingGoose/
+  base: process.env.GITHUB_ACTIONS ? '/TradingGoose/' : '/',
   server: {
     host: "::",
     port: 8080,
