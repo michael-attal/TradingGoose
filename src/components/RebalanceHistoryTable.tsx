@@ -1223,7 +1223,7 @@ export default function RebalanceHistoryTable() {
                 totalCount === 0 && (
                   <div className="flex items-center justify-center py-8">
                     <img
-                      src="/goose_sit.png"
+                      src={`${import.meta.env.BASE_URL}goose_sit.png`}
                       alt="No data"
                       className="w-32 h-32 mr-6"
                     />
@@ -1245,7 +1245,7 @@ export default function RebalanceHistoryTable() {
               ) : runningRebalances.length === 0 ? (
                 <div className="flex items-center justify-center py-8">
                   <img
-                    src="/goose_sit.png"
+                    src={`${import.meta.env.BASE_URL}goose_sit.png`}
                     alt="No data"
                     className="w-32 h-32 mr-6"
                   />
@@ -1362,7 +1362,7 @@ export default function RebalanceHistoryTable() {
               ) : completedRebalances.length === 0 ? (
                 <div className="flex items-center justify-center py-8">
                   <img
-                    src="/goose_sit.png"
+                    src={`${import.meta.env.BASE_URL}goose_sit.png`}
                     alt="No data"
                     className="w-32 h-32 mr-6"
                   />
@@ -1456,7 +1456,7 @@ export default function RebalanceHistoryTable() {
               ) : cancelledRebalances.length === 0 ? (
                 <div className="flex items-center justify-center py-8">
                   <img
-                    src="/goose_sit.png"
+                    src={`${import.meta.env.BASE_URL}goose_sit.png`}
                     alt="No data"
                     className="w-32 h-32 mr-6"
                   />

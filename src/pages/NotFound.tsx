@@ -32,7 +32,7 @@ const NotFound = () => {
                 {/* Left side - Image */}
                 <div className="flex justify-center md:justify-end">
                   <img
-                    src="/goose_stare.png"
+                    src={`${import.meta.env.BASE_URL}goose_stare.png`}
                     alt="Lost Goose"
                     className="w-48 h-48 md:w-64 md:h-64 opacity-90"
                   />

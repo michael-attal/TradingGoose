@@ -152,7 +152,7 @@ const Index = () => {
                 {/* Workflow Image */}
                 <div className="lg:col-span-2">
                   <img
-                    src="/Analysis-Flow-dark.png"
+                    src={`${import.meta.env.BASE_URL}Analysis-Flow-dark.png`}
                     alt="Multi-Agent Analysis Pipeline - 5 Phase Trading System"
                     loading="lazy"
                     width="1200"
@@ -217,7 +217,7 @@ const Index = () => {
                 {/* Workflow Image */}
                 <div className="lg:col-span-2">
                   <img
-                    src="/Rebalance-Flow-dark.png"
+                    src={`${import.meta.env.BASE_URL}Rebalance-Flow-dark.png`}
                     alt="Intelligent Portfolio Rebalancing System - Automated Trading Workflow"
                     loading="lazy"
                     width="1200"

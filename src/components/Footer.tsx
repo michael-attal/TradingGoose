@@ -14,7 +14,7 @@ const Footer = () => {
               <Link to="/" className="flex items-center gap-2 sm:gap-3">
                 <div className="p-2 rounded-lg">
                   <img
-                    src="/goose.png"
+                    src={`${import.meta.env.BASE_URL}goose.png`}
                     alt="TradingGoose Logo"
                     className="h-8 w-8 sm:h-10 sm:w-10"
                   />
